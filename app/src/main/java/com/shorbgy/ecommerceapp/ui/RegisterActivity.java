@@ -1,4 +1,4 @@
-package com.shorbgy.ecommerceapp;
+package com.shorbgy.ecommerceapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.ActivityRegisterBinding;
 
 import java.util.HashMap;

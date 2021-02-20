@@ -1,4 +1,4 @@
-package com.shorbgy.ecommerceapp;
+package com.shorbgy.ecommerceapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.ActivityWelcomeBinding;
 
 public class WelcomeActivity extends AppCompatActivity {

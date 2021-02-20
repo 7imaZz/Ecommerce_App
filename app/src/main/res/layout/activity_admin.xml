@@ -1,8 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AdminActivity">
+    tools:ignore="ContentDescription" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.AdminActivity">
+
+        <TextView
+            android:id="@+id/label_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_product"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_80sdp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/label_tv"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <TableRow android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/shirts_image"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/tshirts" />
+
+                <ImageView
+                    android:id="@+id/sports_shirts_image"
+                    android:layout_width="@dimen/_61sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:src="@drawable/sports"
+                    android:layout_margin="@dimen/_16sdp" />
+
+                <ImageView
+                    android:id="@+id/dresses_image"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:src="@drawable/female_dresses" />
+
+            </TableRow>
+
+            <TableRow android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/jackets_image"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:background="@drawable/sweather" />
+
+                <ImageView
+                    android:id="@+id/glasses_image"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:background="@drawable/glasses"
+                    android:layout_margin="@dimen/_16sdp" />
+
+                <ImageView
+                    android:id="@+id/hats_image"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:background="@drawable/hats" />
+            </TableRow>
+
+            <TableRow android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/bags_image"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:background="@drawable/purses_bags" />
+
+                <ImageView
+                    android:id="@+id/shoes_image"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:background="@drawable/shoess"
+                    android:layout_margin="@dimen/_16sdp" />
+
+                <ImageView
+                    android:id="@+id/headphones_image"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:background="@drawable/headphoness" />
+            </TableRow>
+
+            <TableRow android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/laptops_image"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:background="@drawable/laptops" />
+
+                <ImageView
+                    android:id="@+id/watches_image"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:background="@drawable/watches"
+                    android:layout_margin="@dimen/_16sdp" />
+
+                <ImageView
+                    android:id="@+id/phones_image"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    android:background="@drawable/mobiles" />
+
+            </TableRow>
+
+        </TableLayout>
+
+
+    </RelativeLayout>
+</layout>

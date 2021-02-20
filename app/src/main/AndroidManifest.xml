@@ -11,11 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceApp"
         tools:ignore="AllowBackup">
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".ui.AdminCategory" />
+        <activity android:name=".ui.AdminActivity" />
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
