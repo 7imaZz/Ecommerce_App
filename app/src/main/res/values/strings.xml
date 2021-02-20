@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Ecommerce App</string>
+    <string name="already_have_an_account">Already Have An Account?</string>
+    <string name="join_now">Join Now</string>
+    <string name="find_discover_choose_amp_buy_anything"><![CDATA[Find, Discover, Choose & Buy Anything]]></string>
+    <string name="app_logo">App Logo</string>
 </resources>
