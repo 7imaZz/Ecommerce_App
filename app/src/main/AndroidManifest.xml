@@ -11,9 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceApp"
         tools:ignore="AllowBackup">
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
