@@ -4,4 +4,16 @@
     <string name="join_now">Join Now</string>
     <string name="find_discover_choose_amp_buy_anything"><![CDATA[Find, Discover, Choose & Buy Anything]]></string>
     <string name="app_logo">App Logo</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="login_to_e_commerce_app">Login To E-Commerce App</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="i_m_an_admin">I\'m An Admin</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="i_am_an_admin">I Am An Admin</string>
+    <string name="username">Username</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="create_account">Create Account</string>
 </resources>
