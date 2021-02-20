@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "879268041053",
+    "project_id": "ecommerce-app-3f04c",
+    "storage_bucket": "ecommerce-app-3f04c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879268041053:android:d10a3eda9ff1326d4958b4",
+        "android_client_info": {
+          "package_name": "com.shorbgy.ecommerceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879268041053-k5j8cjetph0mvuhk71ovcqnfmn4id5ca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKlFpmTOKIrpawRwX02SfxHu-9pMu_zT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879268041053-k5j8cjetph0mvuhk71ovcqnfmn4id5ca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
