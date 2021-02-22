@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AdminCategory extends AppCompatActivity {
 
@@ -99,14 +100,14 @@ public class AdminCategory extends AppCompatActivity {
 
             uploadTask.continueWithTask(task -> {
                 if (!task.isSuccessful()){
-                    throw task.getException();
+                    throw Objects.requireNonNull(task.getException());
                 }
 
                 return filePath.getDownloadUrl();
             }).addOnCompleteListener(task -> {
                 dialog.dismiss();
                 if (task.isSuccessful()) {
-                    imageUrl = task.getResult().toString();
+                    imageUrl = Objects.requireNonNull(task.getResult()).toString();
                     saveInfoToDatabase(productRandomKey,  saveCurrentDate, saveCurrentTime);
                 }
             });
@@ -119,9 +120,9 @@ public class AdminCategory extends AppCompatActivity {
         HashMap<String, Object> productMap = new HashMap<>();
 
         productMap.put("pid", productRandomKey);
-        productMap.put("product_name", binding.productName.getText().toString());
-        productMap.put("price", binding.productPrice.getText().toString()+"$");
-        productMap.put("description", binding.productDesc.getText().toString());
+        productMap.put("product_name", Objects.requireNonNull(binding.productName.getText()).toString());
+        productMap.put("price", Objects.requireNonNull(binding.productPrice.getText()).toString()+"$");
+        productMap.put("description", Objects.requireNonNull(binding.productDesc.getText()).toString());
         productMap.put("date", currentDate);
         productMap.put("time", currentTime);
         productMap.put("image_url", imageUrl);
@@ -130,7 +131,7 @@ public class AdminCategory extends AppCompatActivity {
         root.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()){
-                        Log.d("Upload", "onComplete: "+task.getException().getMessage());
+                        Log.d("Upload", "onComplete: "+ Objects.requireNonNull(task.getException()).getMessage());
                     }
                 });
 
@@ -141,6 +142,7 @@ public class AdminCategory extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             //Image Uri will not be null for RESULT_OK
+            assert data != null;
             fileUri = data.getData();
             binding.productImage.setImageURI(fileUri);
 

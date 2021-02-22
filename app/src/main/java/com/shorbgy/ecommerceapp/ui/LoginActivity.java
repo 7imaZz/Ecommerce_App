@@ -13,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.ActivityLoginBinding;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
@@ -54,8 +56,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginAsAdmin() {
-        if(binding.emailLoginEt.getText().toString().equals("admin")
-                && binding.passwordLoginEt.getText().toString().equals("admin")){
+        if(Objects.requireNonNull(binding.emailLoginEt.getText()).toString().equals("admin")
+                && Objects.requireNonNull(binding.passwordLoginEt.getText()).toString().equals("admin")){
             Intent intent = new Intent(this, AdminActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -78,12 +80,12 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Please Enter Your Password", Toast.LENGTH_SHORT).show();
         }else {
             auth.signInWithEmailAndPassword(
-                    binding.emailLoginEt.getText().toString(),
-                    binding.passwordLoginEt.getText().toString()
+                    Objects.requireNonNull(binding.emailLoginEt.getText()).toString(),
+                    Objects.requireNonNull(binding.passwordLoginEt.getText()).toString()
             ).addOnCompleteListener(task -> {
                 dialog.dismiss();
                 if (task.isSuccessful()){
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, HomeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else{

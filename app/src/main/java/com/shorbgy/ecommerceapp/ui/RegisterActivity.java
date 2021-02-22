@@ -15,6 +15,7 @@ import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.ActivityRegisterBinding;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -51,22 +52,22 @@ public class RegisterActivity extends AppCompatActivity {
             dialog.show();
 
             auth.createUserWithEmailAndPassword(
-                    binding.emailEt.getText().toString(),
-                    binding.passwordEt.getText().toString()
+                    Objects.requireNonNull(binding.emailEt.getText()).toString(),
+                    Objects.requireNonNull(binding.passwordEt.getText()).toString()
             ).addOnCompleteListener(task -> {
                 if (task.isSuccessful()){
 
                     HashMap<String, String> userInfo = new HashMap<>();
-                    userInfo.put("name", binding.usernameEt.getText().toString());
+                    userInfo.put("name", Objects.requireNonNull(binding.usernameEt.getText()).toString());
                     userInfo.put("email", binding.emailEt.getText().toString());
-                    userInfo.put("phone_number", binding.phoneNumberEt.getText().toString());
+                    userInfo.put("phone_number", Objects.requireNonNull(binding.phoneNumberEt.getText()).toString());
                     userInfo.put("password", binding.passwordEt.getText().toString());
 
-                    root.child(auth.getCurrentUser().getUid()).setValue(userInfo).addOnCompleteListener(task1 -> {
+                    root.child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).setValue(userInfo).addOnCompleteListener(task1 -> {
                         if(task1.isSuccessful()){
                             Toast.makeText(this,
                                     "Email Created Successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(this, MainActivity.class);
+                            Intent intent = new Intent(this, HomeActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         }else{
