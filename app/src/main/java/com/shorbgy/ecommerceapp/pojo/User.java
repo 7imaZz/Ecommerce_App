@@ -6,6 +6,8 @@ public class User {
     private String name;
     private String password;
     private String phone_number;
+    private String image_url;
+    private String address;
 
     public User() {
     }
@@ -47,5 +49,21 @@ public class User {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

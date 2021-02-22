@@ -1,6 +1,9 @@
 package com.shorbgy.ecommerceapp.pojo;
 
-public class Product {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Product implements Parcelable {
 
     private String pid;
     private String category;
@@ -14,11 +17,29 @@ public class Product {
     public Product() {
     }
 
-    public Product(String description, String price, String product_name) {
-        this.description = description;
-        this.price = price;
-        this.product_name = product_name;
+
+    protected Product(Parcel in) {
+        pid = in.readString();
+        category = in.readString();
+        date = in.readString();
+        description = in.readString();
+        image_url = in.readString();
+        price = in.readString();
+        product_name = in.readString();
+        time = in.readString();
     }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     public String getPid() {
         return pid;
@@ -82,5 +103,22 @@ public class Product {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(pid);
+        dest.writeString(category);
+        dest.writeString(date);
+        dest.writeString(description);
+        dest.writeString(image_url);
+        dest.writeString(price);
+        dest.writeString(product_name);
+        dest.writeString(time);
     }
 }

@@ -1,6 +1,7 @@
 package com.shorbgy.ecommerceapp.utils;
 
 public class Constants {
+    public static final String PRODUCT = "product";
     public static final String CATEGORY_NAME = "category_name";
     public static final String SHIRTS = "shirts";
     public static final String SPORT_SHIRTS = "sport_shirts";

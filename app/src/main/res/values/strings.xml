@@ -45,4 +45,9 @@
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
     <string name="add_item_to_cart_cart">Add Item To Cart Cart</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="close">Close</string>
+    <string name="update">Update</string>
+    <string name="change_profile">Change Profile</string>
+    <string name="address">Address</string>
 </resources>

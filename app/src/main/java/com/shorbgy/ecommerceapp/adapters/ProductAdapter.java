@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.ProductItemBinding;
 import com.shorbgy.ecommerceapp.pojo.Product;
+import com.shorbgy.ecommerceapp.utils.OnProductItemsSelected;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,12 +27,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
+    private OnProductItemsSelected onProductItemsSelected;
     private ArrayList<Product> products = new ArrayList<>();
+
+    public ProductAdapter(OnProductItemsSelected onProductItemsSelected) {
+        this.onProductItemsSelected = onProductItemsSelected;
+    }
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
         notifyDataSetChanged();
     }
+
+
 
     @NonNull
     @Override
@@ -54,6 +62,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .resize(360, 240)
                 .centerCrop()
                 .into(holder.binding.productImage);
+
+        holder.itemView.setOnClickListener(v ->
+                onProductItemsSelected.onItemSelected(position));
     }
 
     @Override
