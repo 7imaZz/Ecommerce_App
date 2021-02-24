@@ -68,17 +68,6 @@
                 android:textColor="#000"
                 apps:text="$25.00" />
 
-            <TextView
-                android:id="@+id/product_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="2dp"
-                android:layout_gravity="center_horizontal"
-                android:textSize="14sp"
-                apps:text="Product Desc Product Desc Product DescProduct Desc" />
-
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

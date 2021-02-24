@@ -55,7 +55,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         holder.binding.productName.setText(products.get(position).getProduct_name());
         holder.binding.productPrice.setText("$"+products.get(position).getPrice());
-        holder.binding.productDesc.setText(products.get(position).getDescription());
 
         Picasso.get()
                 .load(products.get(position).getImage_url())

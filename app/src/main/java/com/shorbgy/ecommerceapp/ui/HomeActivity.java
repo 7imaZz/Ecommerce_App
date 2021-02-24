@@ -123,7 +123,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.nav_cart){
-            Toast.makeText(this, "Cart", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.cartFragment);
+        }else if (item.getItemId() == R.id.nav_home){
+            Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.nav_home);
         }else if (item.getItemId() == R.id.nav_categories){
             Toast.makeText(this, "Categories", Toast.LENGTH_SHORT).show();
         }else if (item.getItemId() == R.id.nav_orders){

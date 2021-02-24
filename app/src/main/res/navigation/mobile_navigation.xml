@@ -24,5 +24,10 @@
         android:name="com.shorbgy.ecommerceapp.ui.ItemFragment"
         android:label="fragment_item"
         tools:layout="@layout/fragment_item" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.shorbgy.ecommerceapp.ui.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 
 </navigation>

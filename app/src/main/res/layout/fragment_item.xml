@@ -12,147 +12,84 @@
         android:layout_height="match_parent"
         tools:context=".ui.ItemFragment">
 
-
-        <RelativeLayout
-            android:id="@+id/rl1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_4sdp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="@dimen/_16sdp"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:id="@+id/product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/product_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:layout_marginTop="@dimen/_4sdp" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/ll1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rl1"
-            android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="@dimen/_280sdp"
+            android:layout_height="@dimen/_280sdp"
+            android:layout_margin="@dimen/_16sdp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center_horizontal">
 
             <ImageView
                 android:id="@+id/product_image"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/product_placeholder"
-                tools:ignore="ContentDescription" />
+                android:contentDescription="@string/product_image"
+                android:src="@drawable/product_placeholder"/>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/card"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_18sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_8sdp">
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_8sdp">
+                    android:text="@string/product_name"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
-                    <TextView
-                        android:id="@+id/product_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="@color/black" />
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/product_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/product_description"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginTop="@dimen/_4sdp"/>
 
                 <TextView
                     android:id="@+id/product_price"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:text="@string/product_price"
                     android:textColor="@color/black"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    tools:ignore="RelativeOverlap" />
+                    android:textSize="18sp"
+                    android:layout_marginTop="@dimen/_4sdp"/>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@id/ll1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_8sdp">
-
-            <TextView
-                android:id="@+id/increase"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:text="+"
-                android:textColor="@color/white"
-                android:textSize="32sp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:background="@color/design_default_color_primary"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/decrease"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:text="-"
-                android:textColor="@color/white"
-                android:textSize="32sp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:background="@color/design_default_color_primary"
-                tools:ignore="HardcodedText" />
-
-
-        </LinearLayout>
+        </ScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/nav_cart"
-            android:contentDescription="@string/add_item_to_cart_cart"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_margin="@dimen/_12sdp"
+            android:src="@drawable/nav_cart"
+            tools:ignore="ContentDescription" />
+
 
     </RelativeLayout>
+
+
+
 </layout>
