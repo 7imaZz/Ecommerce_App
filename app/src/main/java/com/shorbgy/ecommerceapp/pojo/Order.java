@@ -12,6 +12,7 @@ public class Order {
     private String time;
     private String products;
     private long total_price;
+    private String uid;
 
     public Order() {
     }
@@ -94,5 +95,13 @@ public class Order {
 
     public void setTransaction_id(String transaction_id) {
         this.transaction_id = transaction_id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

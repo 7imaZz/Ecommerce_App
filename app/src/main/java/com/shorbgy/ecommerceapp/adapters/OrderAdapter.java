@@ -54,12 +54,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.binding.usernameTv.setText(orders.get(position).getName());
         holder.binding.orderTime.setText("Order Time: "+orders.get(position).getDate()
                 +", "+orders.get(position).getTime());
-        holder.binding.statusTv.setText(orders.get(position).getState());
         holder.binding.transactionIdTv.setText(orders.get(position).getTransaction_id());
         holder.binding.phoneNumberTv.setText(orders.get(position).getPhone());
         holder.binding.productPrice.setText("$"+orders.get(position).getTotal_price());
         holder.binding.locationTv.setText(orders.get(position).getAddress()+", "+orders.get(position).getCity());
         holder.binding.productsTv.setText(orders.get(position).getProducts());
+
+        if (orders.get(position).getState().equals("Not Shipped")){
+            holder.binding.stateNotShippedTv.setVisibility(View.VISIBLE);
+            holder.binding.stateShippedTv.setVisibility(View.GONE);
+        }else{
+            holder.binding.stateNotShippedTv.setVisibility(View.GONE);
+            holder.binding.stateShippedTv.setVisibility(View.VISIBLE);
+            holder.binding.shipButton.setVisibility(View.GONE);
+        }
 
         holder.binding.shipButton.setOnClickListener(v -> onShipButtonClicked.setOnClickListener(position));
     }

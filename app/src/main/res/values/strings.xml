@@ -70,4 +70,6 @@
     <string name="ship">Ship</string>
     <string name="products">products:</string>
     <string name="check_new_orders">Check New Orders</string>
+    <string name="state">State</string>
+    <string name="shipped">Shipped</string>
 </resources>

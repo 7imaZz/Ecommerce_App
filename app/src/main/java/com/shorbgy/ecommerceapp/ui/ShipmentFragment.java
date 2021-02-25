@@ -86,7 +86,7 @@ public class ShipmentFragment extends Fragment {
 
         DatabaseReference ordersReference = FirebaseDatabase.getInstance().getReference("Orders")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(saveCurrentDate+saveCurrentTime);
+                .child(transactionId);
 
         DatabaseReference cartReference = FirebaseDatabase.getInstance().getReference("Cart List")
                 .child("User View").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -108,6 +108,7 @@ public class ShipmentFragment extends Fragment {
         orderMap.put("total_price", totalPrice);
         orderMap.put("products", allProducts);
         orderMap.put("transaction_id", transactionId);
+        orderMap.put("uid", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         ordersReference.setValue(orderMap).addOnCompleteListener(task -> {
             if (task.isSuccessful()){

@@ -53,24 +53,42 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/username_tv"
-                        android:text="@string/status"
+                        android:text="@string/state"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:layout_marginEnd="@dimen/_4sdp"
-                        android:layout_toStartOf="@id/status_tv"
+                        android:layout_toStartOf="@id/ship_rl"
                         android:textSize="12sp"/>
 
-                    <TextView
-                        android:id="@+id/status_tv"
+                    <RelativeLayout
+                        android:id="@+id/ship_rl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/username_tv"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:layout_marginEnd="@dimen/_4sdp"
-                        android:text="@string/pending"
-                        android:textColor="@color/orange"
-                        android:textStyle="bold"
-                        android:textSize="12sp"/>
+                        android:text="@string/pending">
+
+                        <TextView
+                            android:id="@+id/state_not_shipped_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/orange"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:text="@string/pending" />
+
+                        <TextView
+                            android:id="@+id/state_shipped_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/shipped"
+                            android:textColor="#0B5"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:visibility="gone"/>
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
