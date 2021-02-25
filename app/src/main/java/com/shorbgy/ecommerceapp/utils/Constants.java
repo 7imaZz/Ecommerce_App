@@ -15,4 +15,6 @@ public class Constants {
     public static final String LAPTOPS = "laptops";
     public static final String WATCHES = "watches";
     public static final String PHONES = "phones";
+    public static final String PRODUCTS_IN_CART = "products_in_cart";
+    public static final String TOTAL_PRICE = "total_price";
 }

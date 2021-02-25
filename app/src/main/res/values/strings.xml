@@ -50,4 +50,13 @@
     <string name="change_profile">Change Profile</string>
     <string name="address">Address</string>
     <string name="quantity">quantity: 5</string>
+    <string name="total_price">Total Price</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="transaction_done_successfully">Transaction Done Successfully</string>
+    <string name="transaction_successful">Transaction Successful</string>
+    <string name="shipment_details">Shipment Details</string>
+    <string name="city_name">City Name</string>
+    <string name="home_address">Home Address</string>
+    <string name="confirm">Confirm</string>
+    <string name="successful">Successful</string>
 </resources>

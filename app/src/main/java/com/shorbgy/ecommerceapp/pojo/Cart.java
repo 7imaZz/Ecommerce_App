@@ -1,6 +1,9 @@
 package com.shorbgy.ecommerceapp.pojo;
 
-public class Cart {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Cart implements Parcelable{
 
     private String date;
     private String discount;
@@ -19,6 +22,29 @@ public class Cart {
         this.price = price;
         this.quantity = quantity;
     }
+
+    protected Cart(Parcel in) {
+        date = in.readString();
+        discount = in.readString();
+        name = in.readString();
+        pid = in.readString();
+        price = in.readString();
+        time = in.readString();
+        image_url = in.readString();
+        quantity = in.readInt();
+    }
+
+    public static final Creator<Cart> CREATOR = new Creator<Cart>() {
+        @Override
+        public Cart createFromParcel(Parcel in) {
+            return new Cart(in);
+        }
+
+        @Override
+        public Cart[] newArray(int size) {
+            return new Cart[size];
+        }
+    };
 
     public String getDate() {
         return date;
@@ -82,5 +108,22 @@ public class Cart {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(date);
+        dest.writeString(discount);
+        dest.writeString(name);
+        dest.writeString(pid);
+        dest.writeString(price);
+        dest.writeString(time);
+        dest.writeString(image_url);
+        dest.writeInt(quantity);
     }
 }

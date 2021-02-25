@@ -28,6 +28,15 @@
         android:id="@+id/cartFragment"
         android:name="com.shorbgy.ecommerceapp.ui.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_shipmentFragment"
+            app:destination="@id/shipmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shipmentFragment"
+        android:name="com.shorbgy.ecommerceapp.ui.ShipmentFragment"
+        android:label="fragment_shipment"
+        tools:layout="@layout/fragment_shipment" />
 
 </navigation>
