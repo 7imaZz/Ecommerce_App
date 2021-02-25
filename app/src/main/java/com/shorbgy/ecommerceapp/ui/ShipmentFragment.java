@@ -82,6 +82,8 @@ public class ShipmentFragment extends Fragment {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a", Locale.getDefault());
         String saveCurrentTime = currentTime.format(calendar.getTime());
 
+        String transactionId = String.valueOf(System.currentTimeMillis());
+
         DatabaseReference ordersReference = FirebaseDatabase.getInstance().getReference("Orders")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(saveCurrentDate+saveCurrentTime);
@@ -91,7 +93,7 @@ public class ShipmentFragment extends Fragment {
 
         String allProducts = "";
         for (Cart product: products){
-            allProducts += product.getName()+"|";
+            allProducts += product.getName()+" | ";
         }
 
         HashMap<String, Object> orderMap = new HashMap<>();
@@ -105,7 +107,7 @@ public class ShipmentFragment extends Fragment {
         orderMap.put("time", saveCurrentTime);
         orderMap.put("total_price", totalPrice);
         orderMap.put("products", allProducts);
-        orderMap.put("transaction_id", saveCurrentDate+saveCurrentTime);
+        orderMap.put("transaction_id", transactionId);
 
         ordersReference.setValue(orderMap).addOnCompleteListener(task -> {
             if (task.isSuccessful()){

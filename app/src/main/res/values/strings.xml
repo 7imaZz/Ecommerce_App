@@ -59,4 +59,15 @@
     <string name="home_address">Home Address</string>
     <string name="confirm">Confirm</string>
     <string name="successful">Successful</string>
+    <string name="order_time_jan_25_2020_14_00_pm">Order Time: Jan 25, 2020, 14:00 PM</string>
+    <string name="status">Status:</string>
+    <string name="pending">Pending</string>
+    <string name="order_id">Order ID:</string>
+    <string name="order_amount">Order Amount:</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="transaction_id">Transaction ID:</string>
+    <string name="_2643_crest_view_terrace_new_york_usa">2643 Crest View Terrace, New York, USA</string>
+    <string name="ship">Ship</string>
+    <string name="products">products:</string>
+    <string name="check_new_orders">Check New Orders</string>
 </resources>

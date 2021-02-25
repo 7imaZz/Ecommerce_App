@@ -89,5 +89,10 @@ public class AdminActivity extends AppCompatActivity {
             intent.putExtra(Constants.CATEGORY_NAME, Constants.PHONES);
             startActivity(intent);
         });
+
+        binding.checkNewProductsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AdminOrdersActivity.class);
+            startActivity(intent);
+        });
     }
 }

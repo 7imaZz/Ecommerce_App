@@ -11,7 +11,7 @@ public class Order {
     private String state;
     private String time;
     private String products;
-    private String total_price;
+    private long total_price;
 
     public Order() {
     }
@@ -80,11 +80,11 @@ public class Order {
         this.products = products;
     }
 
-    public String getTotal_price() {
+    public long getTotal_price() {
         return total_price;
     }
 
-    public void setTotal_price(String total_price) {
+    public void setTotal_price(long total_price) {
         this.total_price = total_price;
     }
 

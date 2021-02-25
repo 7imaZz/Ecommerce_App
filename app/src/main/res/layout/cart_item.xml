@@ -26,7 +26,6 @@
                 android:id="@+id/product_image"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
-                android:scaleType="centerCrop"
                 android:src="@drawable/product_placeholder"
                 android:contentDescription="@string/product_image" />
 

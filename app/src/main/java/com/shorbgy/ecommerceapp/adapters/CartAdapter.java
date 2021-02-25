@@ -53,8 +53,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         Picasso.get()
                 .load(products.get(position).getImage_url())
                 .placeholder(R.drawable.product_placeholder)
-                .resize(360, 240)
-                .centerCrop()
                 .into(holder.binding.productImage);
     }
 

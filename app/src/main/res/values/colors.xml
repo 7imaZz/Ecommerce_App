@@ -8,5 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="pink">#BF007A</color>
-    <color name="deep_sky_blue">#0099CC</color>
+    <color name="deep_sky_blue">#2196F3</color>
+    <color name="deep_sky_blue_darker">#1976D2</color>
+    <color name="gold">#FFD700</color>
+    <color name="orange">#FFA500</color>
 </resources>

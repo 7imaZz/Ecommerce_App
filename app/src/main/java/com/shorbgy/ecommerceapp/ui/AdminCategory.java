@@ -86,9 +86,9 @@ public class AdminCategory extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a", Locale.getDefault());
         String saveCurrentTime = currentTime.format(calendar.getTime());
 
-        String productRandomKey = saveCurrentDate+saveCurrentTime;
+        String productRandomKey = String.valueOf(System.currentTimeMillis());
 
-        StorageReference filePath = storageReference.child(productRandomKey+".jpg");
+        StorageReference filePath = storageReference.child(saveCurrentDate+saveCurrentTime+".jpg");
 
         final UploadTask uploadTask = filePath.putFile(fileUri);
 

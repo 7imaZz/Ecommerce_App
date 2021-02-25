@@ -58,8 +58,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         Picasso.get()
                 .load(products.get(position).getImage_url())
-                .resize(360, 240)
-                .centerCrop()
                 .into(holder.binding.productImage);
 
         holder.itemView.setOnClickListener(v ->

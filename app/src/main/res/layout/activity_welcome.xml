@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.WelcomeActivity"
-        android:background="@color/teal_700">
+        android:background="@color/deep_sky_blue">
 
 
         <ImageView
@@ -30,7 +30,7 @@
             android:layout_below="@id/logo"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_margin="@dimen/_16sdp"
             android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/pink"
+            android:backgroundTint="@android:color/holo_red_light"
             android:text="@string/join_now" />
 
 

@@ -12,11 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceApp"
         tools:ignore="AllowBackup">
+        <activity android:name=".ui.AdminOrdersActivity" />
         <activity
             android:name=".ui.HomeActivity"
+            android:hardwareAccelerated="true"
             android:label="@string/title_activity_home"
-            android:theme="@style/Theme.EcommerceApp.NoActionBar"
-            android:hardwareAccelerated="true"/>
+            android:theme="@style/Theme.EcommerceApp.NoActionBar" />
         <activity android:name=".ui.AdminCategory" />
         <activity android:name=".ui.AdminActivity" />
         <activity android:name=".ui.RegisterActivity" />
