@@ -73,4 +73,6 @@
     <string name="state">State</string>
     <string name="shipped">Shipped</string>
     <string name="search">Search</string>
+    <string name="edit_products">Edit Products</string>
+    <string name="edit_existing_products">Edit Existing Products</string>
 </resources>

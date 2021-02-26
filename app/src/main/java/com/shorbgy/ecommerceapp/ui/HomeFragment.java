@@ -48,7 +48,11 @@ public class HomeFragment extends Fragment implements OnProductItemsSelected, Se
 
         setHasOptionsMenu(true);
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
-        HomeActivity.navigationView.setCheckedItem(R.id.nav_home);
+
+        if (!HomeActivity.isAdmin) {
+            HomeActivity.navigationView.setCheckedItem(R.id.nav_home);
+        }
+
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         adapter = new ProductAdapter(this);
@@ -93,11 +97,19 @@ public class HomeFragment extends Fragment implements OnProductItemsSelected, Se
     @Override
     public void onItemSelected(int pos) {
 
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.PRODUCT, products.get(pos));
+        if (!HomeActivity.isAdmin) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.PRODUCT, products.get(pos));
 
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_home_to_itemFragment, bundle);
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                    .navigate(R.id.action_nav_home_to_itemFragment, bundle);
+        }else{
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.PRODUCT, products.get(pos));
+
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                    .navigate(R.id.action_nav_home_to_adminItemFragment, bundle);
+        }
     }
 
     @Override

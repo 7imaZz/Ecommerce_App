@@ -23,6 +23,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.pojo.User;
+import com.shorbgy.ecommerceapp.utils.Constants;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -55,33 +56,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Uri fileUri;
     private String imageUrl;
 
+
+    public static boolean isAdmin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        storageReference = FirebaseStorage.getInstance().getReference().child("Profile Images");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-
-        auth = FirebaseAuth.getInstance();
+        isAdmin = getIntent().getBooleanExtra(Constants.IS_ADMIN, false);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        if (!isAdmin) {
+            storageReference = FirebaseStorage.getInstance().getReference().child("Profile Images");
+            databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
-        View headerView = navigationView.getHeaderView(0);
-        usernameTextView = headerView.findViewById(R.id.username_tv);
-        profileImageView = headerView.findViewById(R.id.profile_image);
+            auth = FirebaseAuth.getInstance();
 
-        mDrawerToggle = new ActionBarDrawerToggle(this,
-                drawer, toolbar,
-                R.string.nav_header_desc,
-                R.string.navigation_drawer_close);
+            drawer = findViewById(R.id.drawer_layout);
+            navigationView = findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
 
-        retrieveUserInfo();
+            View headerView = navigationView.getHeaderView(0);
+            usernameTextView = headerView.findViewById(R.id.username_tv);
+            profileImageView = headerView.findViewById(R.id.profile_image);
+
+            mDrawerToggle = new ActionBarDrawerToggle(this,
+                    drawer, toolbar,
+                    R.string.nav_header_desc,
+                    R.string.navigation_drawer_close);
+
+            retrieveUserInfo();
+        }
+
+
     }
 
     private void retrieveUserInfo(){
@@ -110,7 +120,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
+        if (!isAdmin) {
+            mDrawerToggle.syncState();
+        }
     }
 
     @Override

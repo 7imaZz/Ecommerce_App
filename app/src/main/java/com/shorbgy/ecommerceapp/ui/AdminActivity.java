@@ -94,5 +94,11 @@ public class AdminActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AdminOrdersActivity.class);
             startActivity(intent);
         });
+
+        binding.editProductsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra(Constants.IS_ADMIN, true);
+            startActivity(intent);
+        });
     }
 }

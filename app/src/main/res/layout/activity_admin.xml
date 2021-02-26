@@ -20,7 +20,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_70sdp" />
+            android:layout_marginTop="@dimen/_20sdp" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -119,6 +119,15 @@
             </TableRow>
 
         </TableLayout>
+
+        <Button
+            android:id="@+id/edit_products_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/check_new_products_button"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:text="@string/edit_existing_products"/>
 
         <Button
             android:id="@+id/check_new_products_button"
