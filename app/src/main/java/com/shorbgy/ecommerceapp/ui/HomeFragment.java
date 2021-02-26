@@ -3,8 +3,13 @@ package com.shorbgy.ecommerceapp.ui;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class HomeFragment extends Fragment implements OnProductItemsSelected {
+public class HomeFragment extends Fragment implements OnProductItemsSelected, SearchView.OnQueryTextListener{
 
     private static final String TAG = "HomeFragment";
 
@@ -41,6 +46,7 @@ public class HomeFragment extends Fragment implements OnProductItemsSelected {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        setHasOptionsMenu(true);
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
         HomeActivity.navigationView.setCheckedItem(R.id.nav_home);
 
@@ -92,5 +98,37 @@ public class HomeFragment extends Fragment implements OnProductItemsSelected {
 
         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                 .navigate(R.id.action_nav_home_to_itemFragment, bundle);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.home, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.search_menu);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        ArrayList<Product> filteredProducts = new ArrayList<>();
+
+        if (!products.isEmpty()) {
+            for (Product product : products) {
+                if (product.getProduct_name().toLowerCase().contains(newText.toLowerCase())) {
+                    filteredProducts.add(product);
+                }
+            }
+            adapter.setProducts(filteredProducts);
+            adapter.notifyDataSetChanged();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
     }
 }
