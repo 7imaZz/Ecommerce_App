@@ -3,11 +3,13 @@ package com.shorbgy.ecommerceapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.shorbgy.ecommerceapp.R;
@@ -53,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
                 loginAsAdmin();
             }
         });
+
+        binding.forgotTv.setOnClickListener(v -> forgotPassword());
     }
 
     private void loginAsAdmin() {
@@ -93,5 +97,43 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void forgotPassword(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Forgot Password?");
+
+        EditText editText = new EditText(this);
+        editText.setHint("Email Address");
+
+        builder.setView(editText);
+        builder.setPositiveButton("Confirm", (dialog, which) -> {
+            if (editText.getText().toString().isEmpty()){
+                Toast.makeText(LoginActivity.this,
+                        "Please Enter Your Email Address", Toast.LENGTH_LONG).show();
+            }else{
+
+                ProgressDialog progressDialog
+                        = new ProgressDialog(LoginActivity.this);
+                progressDialog.setTitle("Please Wait...");
+                progressDialog.show();
+
+                auth.sendPasswordResetEmail(editText.getText().toString()).addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        Toast.makeText(LoginActivity.this,
+                                "Please Check Your Email Address", Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(LoginActivity.this,
+                                "Failed", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                });
+            }
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.create().show();
     }
 }
