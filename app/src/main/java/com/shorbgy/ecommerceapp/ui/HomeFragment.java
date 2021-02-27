@@ -78,7 +78,6 @@ public class HomeFragment extends Fragment implements OnProductItemsSelected, Se
                 products.clear();
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Product product = dataSnapshot.getValue(Product.class);
-
                     assert product != null;
                     products.add(product);
                 }
@@ -99,13 +98,13 @@ public class HomeFragment extends Fragment implements OnProductItemsSelected, Se
 
         if (!HomeActivity.isAdmin) {
             Bundle bundle = new Bundle();
-            bundle.putParcelable(Constants.PRODUCT, products.get(pos));
+            bundle.putParcelable(Constants.PRODUCT, adapter.getProducts().get(pos));
 
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                     .navigate(R.id.action_nav_home_to_itemFragment, bundle);
         }else{
             Bundle bundle = new Bundle();
-            bundle.putParcelable(Constants.PRODUCT, products.get(pos));
+            bundle.putParcelable(Constants.PRODUCT, adapter.getProducts().get(pos));
 
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                     .navigate(R.id.action_nav_home_to_adminItemFragment, bundle);

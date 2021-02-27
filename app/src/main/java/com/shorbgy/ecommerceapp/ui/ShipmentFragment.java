@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +26,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ShipmentFragment extends Fragment {
+
+    private static final String TAG = "ShipmentFragment";
 
     private FragmentShipmentBinding binding;
     private ArrayList<Cart> products;
@@ -37,10 +40,11 @@ public class ShipmentFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        assert getArguments() != null;
         products = getArguments().getParcelableArrayList(Constants.PRODUCTS_IN_CART);
         totalPrice = getArguments().getInt(Constants.TOTAL_PRICE);
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shipment, container, false);
+
         return binding.getRoot();
     }
 
@@ -85,7 +89,7 @@ public class ShipmentFragment extends Fragment {
         String transactionId = String.valueOf(System.currentTimeMillis());
 
         DatabaseReference ordersReference = FirebaseDatabase.getInstance().getReference("Orders")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .child(transactionId);
 
         DatabaseReference cartReference = FirebaseDatabase.getInstance().getReference("Cart List")
@@ -93,16 +97,16 @@ public class ShipmentFragment extends Fragment {
 
         String allProducts = "";
         for (Cart product: products){
-            allProducts += product.getName()+" | ";
+            allProducts += product.getQuantity()+" "+product.getName()+" | ";
         }
 
         HashMap<String, Object> orderMap = new HashMap<>();
 
-        orderMap.put("address", binding.homeAddressEt.getText().toString());
-        orderMap.put("city", binding.cityNameEt.getText().toString());
+        orderMap.put("address", Objects.requireNonNull(binding.homeAddressEt.getText()).toString());
+        orderMap.put("city", Objects.requireNonNull(binding.cityNameEt.getText()).toString());
         orderMap.put("date", saveCurrentDate);
-        orderMap.put("name", binding.usernameEt.getText().toString());
-        orderMap.put("phone", binding.phoneNumberEt.getText().toString());
+        orderMap.put("name", Objects.requireNonNull(binding.usernameEt.getText()).toString());
+        orderMap.put("phone", Objects.requireNonNull(binding.phoneNumberEt.getText()).toString());
         orderMap.put("state", "Not Shipped");
         orderMap.put("time", saveCurrentTime);
         orderMap.put("total_price", totalPrice);
@@ -114,7 +118,6 @@ public class ShipmentFragment extends Fragment {
             if (task.isSuccessful()){
                 cartReference.removeValue().addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()){
-
                         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).popBackStack();
                         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).popBackStack();
 
@@ -126,5 +129,44 @@ public class ShipmentFragment extends Fragment {
             }
         });
 
+        decreaseProductsQuantity();
+    }
+
+    private void decreaseProductsQuantity(){
+
+
+        for (Cart product: products){
+
+            int finalQuantity = Integer.parseInt(product.getTotal_pieces()) -
+                    Integer.parseInt(product.getQuantity());
+
+            DatabaseReference productReference = FirebaseDatabase.getInstance().getReference("Products")
+                    .child(product.getPid());
+
+            if (finalQuantity>0) {
+                HashMap<String, Object> productMap = new HashMap<>();
+                productMap.put("pieces", String.valueOf(finalQuantity));
+
+
+
+                productReference.updateChildren(productMap).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        Log.d(TAG, "onComplete: Successful");
+                    }else {
+                        Log.d(TAG, "onComplete: "+ Objects.requireNonNull(task.getException()).getMessage());
+                    }
+                });
+            }else {
+                productReference.removeValue().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        Toast.makeText(requireActivity(), "Succ", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onComplete: Successful");
+                    }else {
+                        Toast.makeText(requireActivity(), "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onComplete: "+ Objects.requireNonNull(task.getException()).getMessage());
+                    }
+                });
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@ public class Product implements Parcelable {
     private String price;
     private String product_name;
     private String time;
+    private String pieces;
 
     public Product() {
     }
@@ -27,6 +28,7 @@ public class Product implements Parcelable {
         price = in.readString();
         product_name = in.readString();
         time = in.readString();
+        pieces = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -105,6 +107,14 @@ public class Product implements Parcelable {
         this.time = time;
     }
 
+    public String getPieces() {
+        return pieces;
+    }
+
+    public void setPieces(String pieces) {
+        this.pieces = pieces;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -120,5 +130,6 @@ public class Product implements Parcelable {
         dest.writeString(price);
         dest.writeString(product_name);
         dest.writeString(time);
+        dest.writeString(pieces);
     }
 }

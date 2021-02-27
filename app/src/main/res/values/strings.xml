@@ -76,4 +76,7 @@
     <string name="edit_products">Edit Products</string>
     <string name="edit_existing_products">Edit Existing Products</string>
     <string name="delete_this_product">Delete This Product</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="increase_item_count">Increase Item Count</string>
+    <string name="decrease_item_count">Decrease Item Count</string>
 </resources>

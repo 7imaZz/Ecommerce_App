@@ -27,7 +27,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
-    private OnProductItemsSelected onProductItemsSelected;
+    private final OnProductItemsSelected onProductItemsSelected;
     private ArrayList<Product> products = new ArrayList<>();
 
     public ProductAdapter(OnProductItemsSelected onProductItemsSelected) {
@@ -39,7 +39,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         notifyDataSetChanged();
     }
 
-
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
 
     @NonNull
     @Override

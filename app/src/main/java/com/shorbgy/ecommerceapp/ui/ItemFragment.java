@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +36,10 @@ public class ItemFragment extends Fragment {
     private FirebaseAuth auth;
     private Product product;
 
+
+    private int quantity = 1;
+    private long totalPrice = 0;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,16 +64,41 @@ public class ItemFragment extends Fragment {
         assert bundle != null;
         product = bundle.getParcelable(Constants.PRODUCT);
 
+        totalPrice = Long.parseLong(product.getPrice());
+
         binding.productName.setText(product.getProduct_name());
-        binding.productPrice.setText("$"+product.getPrice());
+        binding.productPrice.setText("Total Price: $"+totalPrice);
         binding.productDesc.setText(product.getDescription());
+        binding.quantity.setText(String.valueOf(quantity));
+        binding.pieces.setText(product.getPieces()+" Pieces Existing");
 
         Picasso.get()
                 .load(product.getImage_url())
                 .placeholder(R.drawable.product_placeholder)
                 .into(binding.productImage);
 
-        binding.fab.setOnClickListener(v -> addItemToCartList());
+        binding.increase.setOnClickListener(v -> {
+            if (quantity<Integer.parseInt(product.getPieces())){
+                quantity++;
+                binding.quantity.setText(String.valueOf(quantity));
+                totalPrice = quantity*Long.parseLong(product.getPrice());
+                binding.productPrice.setText("Total Price: $"+totalPrice);
+            }else {
+                Toast.makeText(requireActivity(), "There Are Only "+product.getPieces()+" Pieces"
+                        , Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.decrease.setOnClickListener(v -> {
+            if (quantity>1) {
+                quantity--;
+                binding.quantity.setText(String.valueOf(quantity));
+                totalPrice = quantity*Long.parseLong(product.getPrice());
+                binding.productPrice.setText("Total Price: $"+totalPrice);
+            }
+        });
+
+        binding.addToCart.setOnClickListener(v -> addItemToCartList());
     }
 
     private void addItemToCartList(){
@@ -87,12 +117,14 @@ public class ItemFragment extends Fragment {
         productMap.put("discount", "");
         productMap.put("pid", product.getPid());
         productMap.put("name", product.getProduct_name());
-        productMap.put("price", product.getPrice());
-        productMap.put("quantity", 1);
+        productMap.put("price", String.valueOf(totalPrice));
+        productMap.put("quantity", String.valueOf(quantity));
         productMap.put("time", saveCurrentTime);
         productMap.put("image_url", product.getImage_url());
+        productMap.put("total_pieces", product.getPieces());
 
-        databaseReference.child("Admin View").child(auth.getCurrentUser().getUid()).child("Products")
+        databaseReference.child("Admin View")
+                .child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).child("Products")
                 .child(product.getPid())
                 .setValue(productMap).addOnCompleteListener(task -> {
                     if (task.isSuccessful()){

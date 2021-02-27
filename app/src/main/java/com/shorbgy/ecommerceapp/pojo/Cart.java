@@ -12,12 +12,13 @@ public class Cart implements Parcelable{
     private String price;
     private String time;
     private String image_url;
-    private int quantity;
+    private String quantity;
+    private String total_pieces;
 
     public Cart() {
     }
 
-    public Cart(String name, String price, int quantity) {
+    public Cart(String name, String price, String quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -31,7 +32,8 @@ public class Cart implements Parcelable{
         price = in.readString();
         time = in.readString();
         image_url = in.readString();
-        quantity = in.readInt();
+        quantity = in.readString();
+        total_pieces = in.readString();
     }
 
     public static final Creator<Cart> CREATOR = new Creator<Cart>() {
@@ -94,11 +96,11 @@ public class Cart implements Parcelable{
         this.time = time;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
@@ -115,6 +117,14 @@ public class Cart implements Parcelable{
         return 0;
     }
 
+    public String getTotal_pieces() {
+        return total_pieces;
+    }
+
+    public void setTotal_pieces(String total_pieces) {
+        this.total_pieces = total_pieces;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(date);
@@ -124,6 +134,7 @@ public class Cart implements Parcelable{
         dest.writeString(price);
         dest.writeString(time);
         dest.writeString(image_url);
-        dest.writeInt(quantity);
+        dest.writeString(quantity);
+        dest.writeString(total_pieces);
     }
 }
