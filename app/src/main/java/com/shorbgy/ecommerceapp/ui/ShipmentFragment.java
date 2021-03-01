@@ -15,11 +15,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.FragmentShipmentBinding;
 import com.shorbgy.ecommerceapp.pojo.Cart;
+import com.shorbgy.ecommerceapp.pojo.User;
 import com.shorbgy.ecommerceapp.utils.Constants;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,6 +55,8 @@ public class ShipmentFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        completeUserDetails();
 
         binding.confirmButton.setOnClickListener(v -> {
             if (TextUtils.isEmpty(binding.usernameEt.getText())){
@@ -130,6 +136,30 @@ public class ShipmentFragment extends Fragment {
         });
 
         decreaseProductsQuantity();
+    }
+
+    private void completeUserDetails(){
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                assert user != null;
+                binding.usernameEt.setText(user.getName());
+                binding.emailEt.setText(user.getEmail());
+                binding.phoneNumberEt.setText(user.getPhone_number());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void decreaseProductsQuantity(){
