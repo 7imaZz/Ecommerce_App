@@ -123,6 +123,7 @@ public class AdminCategory extends AppCompatActivity {
         productMap.put("product_name", Objects.requireNonNull(binding.productName.getText()).toString());
         productMap.put("price", Objects.requireNonNull(binding.productPrice.getText()).toString());
         productMap.put("description", Objects.requireNonNull(binding.productDesc.getText()).toString());
+        productMap.put("pieces", Objects.requireNonNull(binding.pieces.getText()).toString());
         productMap.put("date", currentDate);
         productMap.put("time", currentTime);
         productMap.put("image_url", imageUrl);

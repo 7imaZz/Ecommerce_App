@@ -50,6 +50,16 @@
                     app:met_floatingLabel="normal"
                     android:hint="@string/product_description" />
 
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/pieces"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:met_floatingLabel="normal"
+                    android:inputType="number"
+                    android:hint="@string/how_many_pieces" />
+
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/product_price"
                     android:layout_width="match_parent"

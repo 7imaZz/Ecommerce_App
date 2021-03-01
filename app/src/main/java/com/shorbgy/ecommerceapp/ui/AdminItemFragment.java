@@ -55,6 +55,8 @@ public class AdminItemFragment extends Fragment {
         binding.productNam.setText(product.getProduct_name());
         binding.productPrice.setText(product.getPrice());
         binding.productDesc.setText(product.getDescription());
+        binding.pieces.setText(product.getPieces());
+
         Picasso.get()
                 .load(product.getImage_url())
                 .into(binding.productImage);
@@ -75,6 +77,7 @@ public class AdminItemFragment extends Fragment {
         productMap.put("product_name", Objects.requireNonNull(binding.productNam.getText()).toString());
         productMap.put("price", Objects.requireNonNull(binding.productPrice.getText()).toString());
         productMap.put("description", Objects.requireNonNull(binding.productDesc.getText()).toString());
+        productMap.put("pieces", Objects.requireNonNull(binding.pieces.getText()).toString());
 
         databaseReference.child(product.getPid()).updateChildren(productMap).addOnCompleteListener(task -> {
             if (task.isSuccessful()){
