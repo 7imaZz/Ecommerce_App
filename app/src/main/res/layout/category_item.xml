@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        app:cardCornerRadius="@dimen/_4sdp"
+        android:layout_margin="@dimen/_8sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/cover_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/tshirts_category"
+                android:scaleType="centerCrop"
+                android:foreground="@drawable/gradient"
+                android:contentDescription="@string/category_image"
+                tools:ignore="UnusedAttribute" />
+
+            <TextView
+                android:id="@+id/category_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:gravity="bottom"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:text="@string/t_shirts"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:textStyle="bold"
+                android:shadowColor="@color/black"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="4" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

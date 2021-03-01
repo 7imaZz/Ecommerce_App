@@ -80,4 +80,17 @@
     <string name="increase_item_count">Increase Item Count</string>
     <string name="decrease_item_count">Decrease Item Count</string>
     <string name="location">Location</string>
+    <string name="category_image">Category Image</string>
+    <string name="t_shirts">T-Shirts</string>
+    <string name="sports_clothes">Sports Clothes</string>
+    <string name="female_clothes">Female Clothes</string>
+    <string name="jackets">Jackets</string>
+    <string name="glasses">Glasses</string>
+    <string name="hats">Hats</string>
+    <string name="bags">Bags</string>
+    <string name="shoes">Shoes</string>
+    <string name="headphones">Headphones</string>
+    <string name="laptops">Laptops</string>
+    <string name="accessories">Accessories</string>
+    <string name="phones">Phones</string>
 </resources>

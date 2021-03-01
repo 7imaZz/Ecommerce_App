@@ -20,73 +20,73 @@ public class AdminActivity extends AppCompatActivity {
 
         binding.shirtsImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.SHIRTS);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.t_shirts));
             startActivity(intent);
         });
 
         binding.sportsShirtsImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.SPORT_SHIRTS);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.sports_clothes));
             startActivity(intent);
         });
 
         binding.dressesImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.DRESSES);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.female_clothes));
             startActivity(intent);
         });
 
         binding.jacketsImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.JACKETS);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.jackets));
             startActivity(intent);
         });
 
         binding.glassesImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.GLASSES);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.glasses));
             startActivity(intent);
         });
 
         binding.hatsImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.HATS);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.hats));
             startActivity(intent);
         });
 
         binding.bagsImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.BAGS);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.bags));
             startActivity(intent);
         });
 
         binding.shoesImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.SHOES);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.shoes));
             startActivity(intent);
         });
 
         binding.headphonesImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.HEADPHONES);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.headphones));
             startActivity(intent);
         });
 
         binding.laptopsImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.LAPTOPS);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.laptops));
             startActivity(intent);
         });
 
         binding.watchesImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.WATCHES);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.accessories));
             startActivity(intent);
         });
 
         binding.phonesImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminCategory.class);
-            intent.putExtra(Constants.CATEGORY_NAME, Constants.PHONES);
+            intent.putExtra(Constants.CATEGORY_NAME, getString(R.string.phones));
             startActivity(intent);
         });
 

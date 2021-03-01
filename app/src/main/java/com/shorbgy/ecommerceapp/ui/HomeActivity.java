@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else if (item.getItemId() == R.id.nav_home){
             Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.nav_home);
         }else if (item.getItemId() == R.id.nav_categories){
-            Toast.makeText(this, "Categories", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.categoriesFragment);
         }else if (item.getItemId() == R.id.nav_orders){
             Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.customerOrdersFragment);
         }else if (item.getItemId() == R.id.nav_settings){

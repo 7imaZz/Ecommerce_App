@@ -51,5 +51,23 @@
         android:name="com.shorbgy.ecommerceapp.ui.CustomerOrdersFragment"
         android:label="fragment_customer_orders"
         tools:layout="@layout/fragment_customer_orders" />
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.shorbgy.ecommerceapp.ui.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_categoryProductsFragment2"
+            app:destination="@id/categoryProductsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryProductsFragment"
+        android:name="com.shorbgy.ecommerceapp.ui.CategoryProductsFragment"
+        android:label="fragment_category_products"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_categoryProductsFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
 
 </navigation>
