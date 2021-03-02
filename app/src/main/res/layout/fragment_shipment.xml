@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.ShipmentFragment"
+        tools:context=".ui.home_activity.fragments.ShipmentFragment"
         android:layout_margin="@dimen/_8sdp">
 
 

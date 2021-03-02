@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.AdminCategory">
+        tools:context=".ui.admin_category_activity.AdminCategory">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

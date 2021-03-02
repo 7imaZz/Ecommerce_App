@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.LoginActivity">
+        tools:context=".ui.login_activity.LoginActivity">
 
         <ImageView
             android:id="@+id/logo"

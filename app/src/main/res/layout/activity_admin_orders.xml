@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.AdminOrdersActivity"
+        tools:context=".ui.admin_orders_activity.AdminOrdersActivity"
         android:background="#DDD">
 
         <androidx.recyclerview.widget.RecyclerView

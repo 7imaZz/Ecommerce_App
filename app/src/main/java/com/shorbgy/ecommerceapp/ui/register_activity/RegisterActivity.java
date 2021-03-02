@@ -1,18 +1,20 @@
-package com.shorbgy.ecommerceapp.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+package com.shorbgy.ecommerceapp.ui.register_activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.ActivityRegisterBinding;
+import com.shorbgy.ecommerceapp.ui.home_activity.HomeActivity;
 
 import java.util.HashMap;
 import java.util.Objects;

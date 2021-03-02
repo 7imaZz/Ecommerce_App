@@ -1,13 +1,16 @@
-package com.shorbgy.ecommerceapp.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+package com.shorbgy.ecommerceapp.ui.admin_activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.ActivityAdminBinding;
+import com.shorbgy.ecommerceapp.ui.admin_category_activity.AdminCategory;
+import com.shorbgy.ecommerceapp.ui.admin_orders_activity.AdminOrdersActivity;
+import com.shorbgy.ecommerceapp.ui.home_activity.HomeActivity;
 import com.shorbgy.ecommerceapp.utils.Constants;
 
 public class AdminActivity extends AppCompatActivity {

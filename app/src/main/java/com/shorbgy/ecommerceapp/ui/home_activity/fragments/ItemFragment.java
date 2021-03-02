@@ -1,4 +1,4 @@
-package com.shorbgy.ecommerceapp.ui;
+package com.shorbgy.ecommerceapp.ui.home_activity.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -6,58 +6,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.FragmentItemBinding;
 import com.shorbgy.ecommerceapp.pojo.Product;
+import com.shorbgy.ecommerceapp.ui.home_activity.HomeActivity;
+import com.shorbgy.ecommerceapp.ui.home_activity.HomeViewModel;
 import com.shorbgy.ecommerceapp.utils.Constants;
 import com.squareup.picasso.Picasso;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.Objects;
 
 public class ItemFragment extends Fragment {
 
+    private HomeViewModel viewModel;
     private FragmentItemBinding binding;
-    private DatabaseReference databaseReference;
-    private FirebaseAuth auth;
     private Product product;
 
 
     private int quantity = 1;
     private long totalPrice = 0;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Cart List");
-        auth = FirebaseAuth.getInstance();
-
-        // Inflate the layout for this fragment
+        viewModel = ((HomeActivity) requireActivity()).viewModel;
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_item, container, false);
-        return binding.getRoot();
-    }
-
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         Bundle bundle = getArguments();
 
@@ -99,45 +80,22 @@ public class ItemFragment extends Fragment {
         });
 
         binding.addToCart.setOnClickListener(v -> addItemToCartList());
+
+        return binding.getRoot();
     }
 
     private void addItemToCartList(){
 
-        Calendar calendar = Calendar.getInstance();
+        viewModel.addItemToCartList(product, String.valueOf(totalPrice), String.valueOf(quantity));
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
-        String saveCurrentDate = currentDate.format(calendar.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a", Locale.getDefault());
-        String saveCurrentTime = currentTime.format(calendar.getTime());
-
-        HashMap<String, Object> productMap = new HashMap<>();
-
-        productMap.put("date", saveCurrentDate);
-        productMap.put("discount", "");
-        productMap.put("pid", product.getPid());
-        productMap.put("name", product.getProduct_name());
-        productMap.put("price", String.valueOf(totalPrice));
-        productMap.put("quantity", String.valueOf(quantity));
-        productMap.put("time", saveCurrentTime);
-        productMap.put("image_url", product.getImage_url());
-        productMap.put("total_pieces", product.getPieces());
-
-        databaseReference.child("Admin View")
-                .child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).child("Products")
-                .child(product.getPid())
-                .setValue(productMap).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
-                        databaseReference.child("User View").child(auth.getCurrentUser().getUid()).child("Products")
-                                .child(product.getPid())
-                                .setValue(productMap).addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful()){
-                                        Snackbar.make(requireView(),
-                                                "Item Added To Cart", Snackbar.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }
-                });
-
+        viewModel.addItemToCartTaskMutableLiveData.observe(getViewLifecycleOwner(), task -> {
+            if (task.isSuccessful()){
+                Snackbar.make(requireView(),
+                        "Item Added To Cart", Snackbar.LENGTH_SHORT).show();
+                viewModel.addItemToCartTaskMutableLiveData.removeObservers(getViewLifecycleOwner());
+            }
+        });
     }
+
+
 }

@@ -1,9 +1,7 @@
-package com.shorbgy.ecommerceapp.ui;
+package com.shorbgy.ecommerceapp.ui.home_activity.fragments;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -13,22 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.FragmentAdminItemBinding;
 import com.shorbgy.ecommerceapp.pojo.Product;
+import com.shorbgy.ecommerceapp.ui.home_activity.HomeActivity;
+import com.shorbgy.ecommerceapp.ui.home_activity.HomeViewModel;
 import com.shorbgy.ecommerceapp.utils.Constants;
 import com.squareup.picasso.Picasso;
-
 import java.util.HashMap;
 import java.util.Objects;
 
 public class AdminItemFragment extends Fragment {
 
     private FragmentAdminItemBinding binding;
-    private DatabaseReference databaseReference;
     private Product product;
+    private HomeViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -36,16 +33,8 @@ public class AdminItemFragment extends Fragment {
 
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Products");
-
-        // Inflate the layout for this fragment
+        viewModel = ((HomeActivity) requireActivity()).viewModel;
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_item, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
         Bundle bundle = getArguments();
 
@@ -67,6 +56,8 @@ public class AdminItemFragment extends Fragment {
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).popBackStack());
 
         binding.deleteButton.setOnClickListener(v -> deleteProduct());
+
+        return binding.getRoot();
     }
 
     private void updateProduct(){
@@ -79,11 +70,12 @@ public class AdminItemFragment extends Fragment {
         productMap.put("description", Objects.requireNonNull(binding.productDesc.getText()).toString());
         productMap.put("pieces", Objects.requireNonNull(binding.pieces.getText()).toString());
 
-        databaseReference.child(product.getPid()).updateChildren(productMap).addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                Snackbar.make(requireView(), "Product Updated Successfully", Snackbar.LENGTH_SHORT).show();
-                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).popBackStack();
-            }
+        viewModel.updateProduct(product, productMap);
+
+        viewModel.updateProductTaskMutableLiveData.observe(getViewLifecycleOwner(), task -> {
+            Snackbar.make(requireView(), "Product Updated Successfully", Snackbar.LENGTH_SHORT).show();
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).popBackStack();
+            viewModel.updateProductTaskMutableLiveData.removeObservers(getViewLifecycleOwner());
         });
     }
 
@@ -94,12 +86,18 @@ public class AdminItemFragment extends Fragment {
         dialog.setTitle("Confirmation");
         dialog.setMessage("Are you sure you want to delete this product?");
 
-        dialog.setPositiveButton("Yes", (dialog1, which) -> databaseReference.child(product.getPid()).removeValue().addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                Snackbar.make(requireView(), "Product Deleted Successfully", Snackbar.LENGTH_SHORT).show();
-                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).popBackStack();
-            }
-        }));
+        dialog.setPositiveButton("Yes", (dialog1, which) ->{
+
+            viewModel.deleteProduct(product);
+
+            viewModel.deleteProductTaskMutableLiveData.observe(getViewLifecycleOwner(), task -> {
+                if (task.isSuccessful()){
+                    Snackbar.make(requireView(), "Product Deleted Successfully", Snackbar.LENGTH_SHORT).show();
+                    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).popBackStack();
+                    viewModel.deleteProductTaskMutableLiveData.removeObservers(getViewLifecycleOwner());
+                }
+            });
+        });
 
         dialog.setNegativeButton("Cancel", (dialog12, which) -> dialog12.dismiss());
 

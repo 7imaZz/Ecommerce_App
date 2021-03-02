@@ -1,51 +1,39 @@
-package com.shorbgy.ecommerceapp.ui;
+package com.shorbgy.ecommerceapp.ui.admin_orders_activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import android.os.Bundle;
 import android.util.Log;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.shorbgy.ecommerceapp.R;
-import com.shorbgy.ecommerceapp.adapters.OrderAdapter;
-import com.shorbgy.ecommerceapp.databinding.ActivityAdminOrdersBinding;
 import com.shorbgy.ecommerceapp.pojo.Order;
-import com.shorbgy.ecommerceapp.utils.OnShipButtonClicked;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 
-public class AdminOrdersActivity extends AppCompatActivity implements OnShipButtonClicked {
+public class AdminOrdersViewModel extends ViewModel{
 
-    private static final String TAG = "AdminOrdersActivity";
+    private static final String TAG = "AdminOrdersViewModel";
 
-    ActivityAdminOrdersBinding binding;
-    private OrderAdapter adapter;
-
+    private final DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users");
     private final ArrayList<Order> orders = new ArrayList<>();
     private final HashSet<String> transactionIds = new HashSet<>();
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_orders);
 
-        adapter = new OrderAdapter(this);
 
-        binding.ordersRv.setAdapter(adapter);
+    public MutableLiveData<ArrayList<Order>> ordersMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<Task<Void>> shipOrderTaskMutableLiveData = new MutableLiveData<>();
 
+
+    public AdminOrdersViewModel() {
         getOrders();
     }
 
-    private void getOrders(){
-
-        DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users");
+    public void getOrders(){
 
         usersReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -54,7 +42,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements OnShipButt
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Log.d(TAG, "onDataChange: "+dataSnapshot.getKey());
                     DatabaseReference ordersReference = FirebaseDatabase.getInstance().getReference("Orders")
-                            .child(dataSnapshot.getKey());
+                            .child(Objects.requireNonNull(dataSnapshot.getKey()));
 
                     ordersReference.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -68,8 +56,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements OnShipButt
                                         transactionIds.add(order.getTransaction_id());
                                     }
                                 }
-                                adapter.setOrders(orders);
-                                adapter.notifyDataSetChanged();
+                                ordersMutableLiveData.postValue(orders);
                             }
                         }
                         @Override
@@ -82,12 +69,12 @@ public class AdminOrdersActivity extends AppCompatActivity implements OnShipButt
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "onCancelled: "+error.getMessage());
             }
         });
     }
 
-    private void shipProduct(String transactionId, String uid){
+    public void shipOrder(String transactionId, String uid){
 
         DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Orders")
                 .child(uid)
@@ -96,29 +83,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements OnShipButt
         HashMap<String, Object> stateMap = new HashMap<>();
         stateMap.put("state", "Shipped");
 
-        usersReference.updateChildren(stateMap).addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                Snackbar.make(binding.getRoot(), "Shipped Successfully", Snackbar.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public void setOnClickListener(int pos) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-
-        dialog.setTitle("Confirmation");
-        dialog.setMessage("Are This Order Shipped Successfully?");
-
-        dialog.setPositiveButton("Yes", (dialog1, which) -> {
-            shipProduct(orders.get(pos).getTransaction_id(), orders.get(pos).getUid());
-            orders.get(pos).setState("Shipped");
-            adapter.notifyDataSetChanged();
-        });
-
-        dialog.setNegativeButton("No", (dialog12, which) -> dialog12.dismiss());
-
-        dialog.show();
-
+        usersReference.updateChildren(stateMap).addOnCompleteListener(task ->
+                shipOrderTaskMutableLiveData.postValue(task));
     }
 }

@@ -1,8 +1,7 @@
-package com.shorbgy.ecommerceapp.ui;
+package com.shorbgy.ecommerceapp.ui.login_activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +13,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.shorbgy.ecommerceapp.R;
 import com.shorbgy.ecommerceapp.databinding.ActivityLoginBinding;
+import com.shorbgy.ecommerceapp.ui.admin_activity.AdminActivity;
+import com.shorbgy.ecommerceapp.ui.home_activity.HomeActivity;
 
 import java.util.Objects;
 
@@ -29,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-
         auth = FirebaseAuth.getInstance();
 
         binding.adminTv.setOnClickListener(v -> {
@@ -85,17 +85,17 @@ public class LoginActivity extends AppCompatActivity {
         }else {
             auth.signInWithEmailAndPassword(
                     Objects.requireNonNull(binding.emailLoginEt.getText()).toString(),
-                    Objects.requireNonNull(binding.passwordLoginEt.getText()).toString()
-            ).addOnCompleteListener(task -> {
-                dialog.dismiss();
-                if (task.isSuccessful()){
-                    Intent intent = new Intent(this, HomeActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(this, "Invalid Email Or Password", Toast.LENGTH_SHORT).show();
-                }
-            });
+                    Objects.requireNonNull(binding.passwordLoginEt.getText()).toString())
+                    .addOnCompleteListener(task -> {
+                        dialog.dismiss();
+                        if (task.isSuccessful()){
+                            Intent intent = new Intent(this, HomeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(this, "Invalid Email Or Password", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
 
