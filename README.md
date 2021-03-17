@@ -30,4 +30,4 @@ Here's the specifics of what I used in this app:
 
 ### Check New Orders By Admin & Ship Them 
 
-![Screen Record From App](https://media.giphy.com/media/cXTciUMRUYMOyyKfO4/giphy.gif)
+![Screen Record From App](https://media.giphy.com/media/WymCZ2EPldRtl0iXoL/giphy.gif)
