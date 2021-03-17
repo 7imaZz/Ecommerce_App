@@ -23,3 +23,7 @@ Here's the specifics of what I used in this app:
 ### Upload New Product By Admin
 
 ![Screen Record From App](https://media.giphy.com/media/BWnFDxDDJxuRltusIl/giphy.gif)
+
+### Edit Or Delete Existing Product By Admin
+
+![Screen Record From App](https://media.giphy.com/media/viv51fFS9sGwmXs7Jd/giphy.gif)
