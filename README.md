@@ -27,3 +27,7 @@ Here's the specifics of what I used in this app:
 ### Edit Or Delete Existing Product By Admin
 
 ![Screen Record From App](https://media.giphy.com/media/viv51fFS9sGwmXs7Jd/giphy.gif)
+
+### Check New Orders By Admin & Ship Them 
+
+![Screen Record From App](https://media.giphy.com/media/cXTciUMRUYMOyyKfO4/giphy.gif)
