@@ -19,3 +19,7 @@ Here's the specifics of what I used in this app:
 ### Customer Section
 
 ![Screen Record From App](https://media.giphy.com/media/lKOAQJ9qQcMLN1mT4u/giphy.gif)
+
+### Upload New Product By Admin
+
+![Screen Record From App](https://media.giphy.com/media/BWnFDxDDJxuRltusIl/giphy.gif)
